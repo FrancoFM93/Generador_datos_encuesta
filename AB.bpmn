@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+                   id="Definitions_1"
+                   targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="ProcesoProyecto" isExecutable="false">
+    
+    <!-- Evento de inicio -->
+    <bpmn:startEvent id="StartEvent" name="Inicio">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+
+    <!-- Tareas del proceso -->
+    <bpmn:task id="LevantamientoRequerimientos" name="Levantamiento de Requerimientos">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:task id="DisenoDelSistema" name="Diseño del Sistema">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:task id="ModelamientoBPMN" name="Modelamiento BPMN">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:task id="DesarrolloDelSistema" name="Desarrollo del Sistema">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+      <bpmn:outgoing>Flow_5</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:task id="Pruebas" name="Pruebas">
+      <bpmn:incoming>Flow_5</bpmn:incoming>
+      <bpmn:outgoing>Flow_6</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:task id="DocumentacionFinal" name="Documentación Final">
+      <bpmn:incoming>Flow_6</bpmn:incoming>
+      <bpmn:outgoing>Flow_7</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:task id="PresentacionDelProyecto" name="Presentación del Proyecto">
+      <bpmn:incoming>Flow_7</bpmn:incoming>
+      <bpmn:outgoing>Flow_8</bpmn:outgoing>
+    </bpmn:task>
+
+    <!-- Evento de fin -->
+    <bpmn:endEvent id="EndEvent" name="Fin">
+      <bpmn:incoming>Flow_8</bpmn:incoming>
+    </bpmn:endEvent>
+
+    <!-- Flujos -->
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent" targetRef="LevantamientoRequerimientos"/>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="LevantamientoRequerimientos" targetRef="DisenoDelSistema"/>
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="DisenoDelSistema" targetRef="ModelamientoBPMN"/>
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="ModelamientoBPMN" targetRef="DesarrolloDelSistema"/>
+    <bpmn:sequenceFlow id="Flow_5" sourceRef="DesarrolloDelSistema" targetRef="Pruebas"/>
+    <bpmn:sequenceFlow id="Flow_6" sourceRef="Pruebas" targetRef="DocumentacionFinal"/>
+    <bpmn:sequenceFlow id="Flow_7" sourceRef="DocumentacionFinal" targetRef="PresentacionDelProyecto"/>
+    <bpmn:sequenceFlow id="Flow_8" sourceRef="PresentacionDelProyecto" targetRef="EndEvent"/>
+  </bpmn:process>
+</bpmn:definitions>
